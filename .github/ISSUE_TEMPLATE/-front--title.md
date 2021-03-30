@@ -1,8 +1,8 @@
 ---
-name: "에러 수정 템플릿"
-about: 에러 수정 템플릿
-title: '[fix] Title'
-labels: 'fix'
+name: "Front 이슈 템플릿"
+about: Front 이슈 템플릿
+title: '[Front] Title'
+labels: 'fe'
 assignees: ''
 
 ---
