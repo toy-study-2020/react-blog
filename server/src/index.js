@@ -8,6 +8,7 @@ const router = new Router();
 const {PORT} = config;
 
 router.use('/api', api.routes());
+app.use(router.routes()).use(router.allowedMethods());
 
 app.listen(PORT, () => {
   console.log(`Listening to Port : ${PORT}`);
