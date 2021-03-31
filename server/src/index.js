@@ -1,8 +1,9 @@
 import Koa from 'koa';
+import config from './config/index.js';
 
 const app = new Koa();
-const PORT = 8787;
+const {PORT} = config;
 
 app.listen(PORT, () => {
-  console.log(`Listening to Port : ${PORT}`)
-})
+  console.log(`Listening to Port : ${PORT}`);
+});
