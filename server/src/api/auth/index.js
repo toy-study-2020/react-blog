@@ -9,8 +9,13 @@ const auth = new Router();
  * */
 
 auth.post('/login', ctx => {
-  const {id, password} = ctx.request.body
-  ctx.body = {id,password}
-})
+  const {id, password} = ctx.request.body;
+  ctx.body = {id, password};
+});
+
+auth.post('/register', ctx => {
+  const {id, password, name, email, gender} = ctx.request.body;
+  ctx.body = {id, password, name, email, gender};
+});
 
 export default auth;
