@@ -85,10 +85,18 @@ auth.post('/register', async ctx => {
 
 auth.get('/check', async ctx => {
   // login check
+  const {user} = ctx.state;
+  if (!user) {
+    ctx.status = 401;
+    return;
+  }
+  ctx.body = user;
 });
 
 auth.post('/logout', async ctx => {
   // remove cookie (token)
+  ctx.cookies.set('access_token');
+  ctx.status = 204;
 });
 
 export default auth;
