@@ -10,7 +10,7 @@ const router = new Router();
 const {PORT, MONGO_URI} = config;
 
 mongoose
-  .connect(MONGO_URI, {useNewUrlParser: true, useFindAndModify: false})
+  .connect(MONGO_URI, {useNewUrlParser: true, useFindAndModify: false, useUnifiedTopology: true})
   .then(() => {
     console.log('Connected to MongoDB');
   })
