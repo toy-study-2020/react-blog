@@ -2,17 +2,17 @@ import mongoose from 'mongoose';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 
-const {Scheme} = mongoose;
+const {Schema} = mongoose;
 
 //userId, password, name, email
-const UserSchema = new Scheme({
+const UserSchema = new Schema({
   userId        : String,
   hashedPassword: String,
   name          : String,
   email         : String
 });
 
-UserSchema.method.setPassword = async (password) => {
+UserSchema.methods.setPassword = async function (password) {
   const hash = await bcrypt.hash(password, 10);
   this.hashedPassword = hash;
 };
@@ -20,6 +20,12 @@ UserSchema.method.setPassword = async (password) => {
 UserSchema.methods.checkPassword = async function (password) {
   const result = await bcrypt.compare(password, this.hashedPassword);
   return result;
+};
+
+UserSchema.methods.setOtherField = function (data) {
+  const {name, email} = data;
+  this.name = name;
+  this.email = email;
 };
 
 UserSchema.methods.serialize = function () {
