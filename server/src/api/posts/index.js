@@ -75,8 +75,31 @@ posts.get('/:id', async ctx => {
   }
 });
 
-posts.patch('/:id', ctx => {
+posts.patch('/:id', async ctx => {
+  const schema = Joi.object().keys({
+    title: Joi.string(),
+    body : Joi.string()
+  });
 
+  const result = schema.validate(ctx.request.body);
+  if (result.error) {
+    ctx.status = 400;
+    ctx.body = result.error;
+    return;
+  }
+  const {id} = ctx.params;
+  try {
+    const post = await Post.findByIdAndUpdate(id, ctx.request.body, {
+      new: true,
+    }).exec();
+    if (!post) {
+      ctx.status = 404;
+      return;
+    }
+    ctx.body = post;
+  } catch (e) {
+    ctx.throw(500, e);
+  }
 });
 
 posts.delete('/:id', async ctx => {
