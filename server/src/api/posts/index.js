@@ -13,8 +13,29 @@ const posts = new Router();
  * [DELETE] 특정 게시글 삭 : /api/posts/:id제
  * */
 
-posts.get('/', ctx => {
-  ctx.body = 'GET : posts success!';
+posts.get('/', async ctx => {
+  const page = parseInt(ctx.query.page || '1', 10);
+  if (page < 1) {
+    ctx.status = 400;
+    return;
+  }
+
+  const {userId} = ctx.query;
+  const query = {
+    ...(userId ? {'user.userId': userId} : {})
+  };
+
+  try {
+    const posts = await Post.find(query).sort({_id: -1}).limit(10).skip((page - 1) * 10).exec();
+    const postCount = await Post.countDocuments(query).exec();
+    ctx.set('Last-Page', Math.ceil(postCount / 10));
+    ctx.body = posts.map(post => post.toJSON()).map(post => ({
+      ...post,
+      body: post.body.length < 200 ? post.body : `${post.body.slice(0, 200)}...`
+    }));
+  } catch (e) {
+    ctx.throw(500, e);
+  }
 });
 
 posts.post('/', async ctx => {
