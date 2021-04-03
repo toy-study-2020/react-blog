@@ -4,9 +4,9 @@ import jwt from 'jsonwebtoken';
 
 const {Scheme} = mongoose;
 
-//id, password, name, email
+//userId, password, name, email
 const UserSchema = new Scheme({
-  id            : String,
+  userId        : String,
   hashedPassword: String,
   name          : String,
   email         : String
@@ -31,8 +31,8 @@ UserSchema.methods.serialize = function () {
 UserSchema.methods.generateToken = function () {
   const token = jwt.sign(
     {
-      _id     : this.id,
-      username: this.username
+      _id   : this.id,
+      userId: this.userId
     },
     process.env.JWT_SECRET,
     {
@@ -42,8 +42,8 @@ UserSchema.methods.generateToken = function () {
   return token;
 };
 
-UserSchema.statics.findByUsername = function (username) {
-  return this.findOne({username});
+UserSchema.statics.findByUserId = function (userId) {
+  return this.findOne({userId});
 };
 
 const User = mongoose.model('User', UserSchema);
