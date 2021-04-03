@@ -79,8 +79,14 @@ posts.patch('/:id', ctx => {
 
 });
 
-posts.delete('/:id', ctx => {
-
+posts.delete('/:id', async ctx => {
+  const {id} = ctx.params;
+  try {
+    await Post.findByIdAndRemove(id).exec();
+    ctx.status = 204;
+  } catch (e) {
+    ctx.throw(500, e);
+  }
 });
 
 export default posts;
