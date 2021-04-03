@@ -1,4 +1,6 @@
 import Router from 'koa-router';
+import Joi from 'joi';
+import Post from '../../modules/post.js';
 
 const posts = new Router();
 
@@ -15,8 +17,27 @@ posts.get('/', ctx => {
   ctx.body = 'GET : posts success!';
 });
 
-posts.post('/', ctx => {
+posts.post('/', async ctx => {
+  const schema = Joi.object().keys({
+    title: Joi.string().required(),
+    body : Joi.string().required(),
+  });
 
+  const result = schema.validate(ctx.request.body);
+  if (result.error) {
+    ctx.status = 400;
+    ctx.body = result.error;
+    return;
+  }
+
+  const {title, body} = ctx.request.body;
+  const post = new Post({title, body, user: ctx.state.user});
+  try {
+    await post.save();
+    ctx.body = post;
+  } catch (e) {
+    ctx.throw(500, e);
+  }
 });
 
 posts.get('/:id', ctx => {
