@@ -4,6 +4,7 @@ import bodyParser from 'koa-bodyparser';
 import mongoose from 'mongoose';
 import config from './config/index.js';
 import api from './api/index.js';
+import jwtMiddleware from './lib/jwtMiddleware.js';
 
 const app = new Koa();
 const router = new Router();
@@ -21,6 +22,7 @@ mongoose
 
 router.use('/api', api.routes());
 app.use(bodyParser());
+app.use(jwtMiddleware);
 app.use(router.routes()).use(router.allowedMethods());
 
 app.listen(PORT, () => {
