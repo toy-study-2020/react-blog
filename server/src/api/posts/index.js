@@ -61,8 +61,18 @@ posts.post('/', async ctx => {
   }
 });
 
-posts.get('/:id', ctx => {
-
+posts.get('/:id', async ctx => {
+  const {id} = ctx.params;
+  try {
+    const post = await Post.findById(id).exec();
+    if (!post) {
+      ctx.status = 404;
+      return;
+    }
+    ctx.body = post;
+  } catch (e) {
+    ctx.throw(500, e);
+  }
 });
 
 posts.patch('/:id', ctx => {
