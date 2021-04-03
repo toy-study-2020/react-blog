@@ -1,6 +1,8 @@
 import Router from 'koa-router';
 import Joi from 'joi';
 import Post from '../../modules/post.js';
+import checkLoggedIn from '../../lib/checkLoggedIn.js';
+import {getPostById, checkOwnPost} from '../../lib/postIdValidation.js';
 
 const posts = new Router();
 
@@ -61,7 +63,7 @@ posts.post('/', async ctx => {
   }
 });
 
-posts.get('/:id', async ctx => {
+posts.get('/:id', getPostById, async ctx => {
   const {id} = ctx.params;
   try {
     const post = await Post.findById(id).exec();
@@ -75,7 +77,7 @@ posts.get('/:id', async ctx => {
   }
 });
 
-posts.patch('/:id', async ctx => {
+posts.patch('/:id', getPostById, checkLoggedIn, checkOwnPost, async ctx => {
   const schema = Joi.object().keys({
     title: Joi.string(),
     body : Joi.string()
@@ -102,7 +104,7 @@ posts.patch('/:id', async ctx => {
   }
 });
 
-posts.delete('/:id', async ctx => {
+posts.delete('/:id', getPostById, checkLoggedIn, checkOwnPost, async ctx => {
   const {id} = ctx.params;
   try {
     await Post.findByIdAndRemove(id).exec();
