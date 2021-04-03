@@ -40,7 +40,7 @@ posts.get('/', async ctx => {
   }
 });
 
-posts.post('/', async ctx => {
+posts.post('/', checkLoggedIn, async ctx => {
   const schema = Joi.object().keys({
     title: Joi.string().required(),
     body : Joi.string().required(),
