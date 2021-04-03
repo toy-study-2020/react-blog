@@ -14,8 +14,16 @@ auth.post('/login', ctx => {
 });
 
 auth.post('/register', ctx => {
-  const {id, password, name, email, gender} = ctx.request.body;
-  ctx.body = {id, password, name, email, gender};
+  const {id, password, name, email} = ctx.request.body;
+  ctx.body = {id, password, name, email};
+});
+
+auth.get('/check', ctx => {
+  // login check
+});
+
+auth.post('/logout', ctx => {
+  // remove cookie (token)
 });
 
 export default auth;
