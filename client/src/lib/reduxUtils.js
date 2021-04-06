@@ -1,0 +1,1 @@
+export const createActionTypes = type => ([type, `${type}_SUCCESS`, `${type}_FAILURE`]);
