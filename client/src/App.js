@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom';
 import Member from './containers/Member';
 import { useState } from 'react';
 
@@ -11,7 +11,7 @@ function App() {
       <Route
         path="/member/login"
         render={Member}/>
-      {/*<Redirect path="*" to="/" />*/}
+      <Redirect path="*" to="/" />
     </Router>
   );
 }
