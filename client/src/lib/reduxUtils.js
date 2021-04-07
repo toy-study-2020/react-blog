@@ -10,12 +10,12 @@ export const createRequestSaga = (type, apiCall) => {
   return function* (action) {
     try {
       const response = yield call(apiCall, action.payload);
-      put({
+      yield put({
         type   : SUCCESS,
         payload: response.data
       });
     } catch (e) {
-      put({
+      yield put({
         type   : FAILURE,
         payload: e
       });
@@ -27,9 +27,9 @@ const client = axios.create();
 
 export const API = {
   auth: {
-    login   : ({userId, password}) => client.post('/api/login', {userId, password}),
-    register: ({userId, password, name, email}) => client.post('/api/register', {userId, password, name, email}),
-    logout  : () => client.post('/api/logout'),
-    check   : () => client.get('/api/check')
+    login   : ({userId, password}) => client.post('/api/auth/login', {userId, password}),
+    register: ({userId, password, name, email}) => client.post('/api/auth/register', {userId, password, name, email}),
+    logout  : () => client.post('/api/auth/logout'),
+    check   : () => client.get('/api/auth/check')
   }
 };
