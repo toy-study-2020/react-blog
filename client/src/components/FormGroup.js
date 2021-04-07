@@ -1,16 +1,15 @@
 import Form from './Form';
 
-const FormGroup = ({forms}) => {
-  const formsComponents = forms.map(f => (
-    <Form
-      key={f}
-      title={f.toUpperCase()}
-      type={f === 'password' ? 'password' : 'text'}
-    />
-  ))
+const FormGroup = ({iter}) => {
   return (
     <>
-      {formsComponents}
+      {iter.map(f => (
+        <Form
+          key={f}
+          title={f.toUpperCase()}
+          type={f === 'password' ? 'password' : 'text'} />
+        ))
+      }
     </>
   );
 };
