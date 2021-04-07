@@ -1,3 +1,4 @@
+import axios from 'axios';
 import {call, put} from 'redux-saga/effects';
 
 export const createActionTypes = type => ([type, `${type}_SUCCESS`, `${type}_FAILURE`]);
@@ -20,4 +21,15 @@ export const createRequestSaga = (type, apiCall) => {
       });
     }
   };
+};
+
+const client = axios.create();
+
+export const API = {
+  auth: {
+    login   : ({userId, password}) => client.post('/api/login', {userId, password}),
+    register: ({userId, password, name, email}) => client.post('/api/register', {userId, password, name, email}),
+    logout  : () => client.post('/api/logout'),
+    check   : () => client.get('/api/check')
+  }
 };
