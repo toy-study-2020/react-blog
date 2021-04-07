@@ -4,3 +4,7 @@ export const REGISTER = {
   name: '',
   email: ''
 };
+
+export const ROUTER = {
+  member: ['login', 'register']
+};
