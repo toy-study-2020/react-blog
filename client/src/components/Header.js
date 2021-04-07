@@ -12,7 +12,7 @@ const Header = _ => {
       <nav>
         <ul>
           <li><Link to="/">HOME</Link></li>
-          {ROUTER.member.map(r => <li><Link to={`/member/${r}`}>{r.toUpperCase()}</Link></li>)}
+          {ROUTER.member.map(r => <li key={r}><Link to={`/member/${r}`}>{r.toUpperCase()}</Link></li>)}
         </ul>
       </nav>
     </header>
