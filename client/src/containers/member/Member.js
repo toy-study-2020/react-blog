@@ -9,7 +9,9 @@ const Member = ({match, location, history}) => {
   return (
     <article>
       <h2>{isLogin ? '로그인' : '회원가입'}</h2>
-      <FormGroup iter={iter} />
+      <FormGroup
+        iter={iter}
+        isLogin={isLogin}/>
     </article>
   );
 };
