@@ -3,7 +3,6 @@ import Header from './components/Header';
 import Footer from './components/Footer';
 import Member from './containers/member/Member';
 import Main from './containers/main/Main';
-import 'antd/dist/antd.css';
 
 function App() {
   return (
