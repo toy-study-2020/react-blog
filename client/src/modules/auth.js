@@ -46,7 +46,10 @@ const auth = handleActions({
       user
     };
   },
-  [REGISTER_FAILURE]: state => ({}),
+  [REGISTER_FAILURE]: state => ({
+    ...state,
+    error: true
+  }),
   [LOGIN_SUCCESS]   : (state, {payload: user}) => {
     console.log('[login handleActions]', user);
     return {
@@ -55,7 +58,10 @@ const auth = handleActions({
       user
     };
   },
-  [LOGIN_FAILURE]   : state => ({})
+  [LOGIN_FAILURE]   : state => ({
+    ...state,
+    error: true
+  })
 }, initialState);
 
 export default auth;
