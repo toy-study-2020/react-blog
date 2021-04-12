@@ -34,7 +34,10 @@ const HeaderStyle = styled.header `
 `;
 const Header = _ => {
   const [nav, setNav] = useState(false);
-  const handlerNav = _ => {
+  const handlerNav = ({state}) => {
+    if (state === 'close') {
+      return setNav(false);
+    }
     setNav(!nav);
   };
   return (
