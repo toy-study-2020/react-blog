@@ -50,8 +50,17 @@ const Header = _ => {
       </button>
       <nav>
         <ul>
-          <li><Link to="/">HOME</Link></li>
-          {ROUTER.member.map(r => <li key={r}><Link to={`/member/${r}`}>{r.toUpperCase()}</Link></li>)}
+          {ROUTER.member.map(r =>
+            <li key={r}>
+              <Link
+                to={r === 'home' ? '/' : `/member/${r}`}
+                onClick={_ => {
+                  handlerNav({state: 'close'})
+                }}>
+                {r.toUpperCase()}
+              </Link>
+            </li>
+          )}
         </ul>
       </nav>
     </HeaderStyle>

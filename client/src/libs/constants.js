@@ -6,5 +6,5 @@ export const REGISTER = {
 };
 
 export const ROUTER = {
-  member: ['login', 'register']
+  member: ['home', 'login', 'register']
 };
