@@ -3,40 +3,8 @@ import Header from './components/Header';
 import Footer from './components/Footer';
 import Member from './containers/member/Member';
 import Main from './containers/main/Main';
-import { createGlobalStyle } from 'styled-components';
+import GlobalStyle from './styles/globalStyle';
 
-const GlobalStyle = createGlobalStyle`
-  body,
-  section,
-  article,
-  main,
-  header,
-  footer,
-  div,
-  ul,
-  li,
-  button,
-  a {
-    margin: 0;
-    padding: 0;
-  }
-  
-  ul,
-  li {
-    list-style: none;
-  }
-  
-  button,
-  a {
-    appearance: none;
-    border: none;
-    background: transparent;
-    
-    &:active {
-      opacity: .6;
-    }
-  }
-`
 function App() {
   return (
     <>
