@@ -68,12 +68,7 @@ const HeaderStyle = styled.header`
 `;
 const Header = _ => {
   const [nav, setNav] = useState(false);
-  const handlerNav = ({state}) => {
-    if (state === 'close') {
-      return setNav(false);
-    }
-    setNav(!nav);
-  };
+  const handlerNav = _ => setNav(!nav);
   return (
     <HeaderStyle>
       <button
@@ -88,9 +83,7 @@ const Header = _ => {
             <li key={r}>
               <Link
                 to={r === 'home' ? '/' : `/member/${r}`}
-                onClick={_ => {
-                  handlerNav({state: 'close'})
-                }}>
+                onClick={handlerNav}>
                 {r.toUpperCase()}
               </Link>
             </li>
