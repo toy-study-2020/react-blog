@@ -47,13 +47,13 @@ function App() {
           <Route
             exact
             path="/"
-            render={Main}/>
+            component={Main}/>
           <Route
             path="/member/register"
-            render={Member}/>
+            component={Member}/>
           <Route
             path="/member/login"
-            render={Member}/>
+            component={Member}/>
           <Redirect path="*" to="/" />
         </main>
         <Footer />
