@@ -1,12 +1,12 @@
 import { Link } from 'react-router-dom';
-import { ROUTER } from '../libs/constants';
-import styled from 'styled-components';
 import { useState } from 'react';
+import { ROUTER } from '../lib/constants';
+import styled from 'styled-components';
 
-const HeaderStyle = styled.header `
+const HeaderStyle = styled.header`
   display: block;
   position: relative;
-  
+
   button {
     position: relative;
     width: 50px;
@@ -15,23 +15,23 @@ const HeaderStyle = styled.header `
     padding: 10px;
     box-sizing: border-box;
     text-indent: -9999px;
-    
+
     &[aria-expanded="true"] {
       span:before {
         transform: rotate(45deg);
         top: 24px
       }
-      
+
       span:after {
         transform: rotate(-45deg);
         bottom: 24px;
       }
-      
+
       + nav {
         display: flex;
       }
     }
-    
+
     span {
       display: block;
       position: absolute;
@@ -40,7 +40,7 @@ const HeaderStyle = styled.header `
       width: 100%;
       height: 100%;
     }
-    
+
     span:before,
     span:after {
       content: "";
@@ -52,16 +52,16 @@ const HeaderStyle = styled.header `
       background-color: #000;
       transition: transform .3s;
     }
-    
+
     span:before {
       top: 14px;
     }
-    
+
     span:after {
       bottom: 14px;
     }
   }
-  
+
   nav {
     display: none;
   }
