@@ -39,7 +39,6 @@ const initialState = {
 
 const auth = handleActions({
   [REGISTER_SUCCESS]: (state, {payload: user}) => {
-    console.log('[register handleActions]', user);
     return {
       ...state,
       error: null,
@@ -51,7 +50,6 @@ const auth = handleActions({
     error: true
   }),
   [LOGIN_SUCCESS]   : (state, {payload: user}) => {
-    console.log('[login handleActions]', user);
     return {
       ...state,
       error: null,
