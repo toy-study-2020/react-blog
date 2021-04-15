@@ -22,17 +22,6 @@ export function* authSaga() {
 }
 
 const initialState = {
-  register: {
-    userId         : '',
-    password       : '',
-    passwordConform: '',
-    name           : '',
-    email          : ''
-  },
-  login   : {
-    userId  : '',
-    password: ''
-  },
   user    : null,
   error   : null
 };
