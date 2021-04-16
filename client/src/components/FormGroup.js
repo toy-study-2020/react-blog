@@ -64,19 +64,26 @@ const FormGroup = ({isLogin}) => {
             <input
               type="password"
               autoComplete="off"
-              name="passwordConfirm"/>
+              name="passwordConfirm"
+              onChange={onChange}/>
           </label>
         </div>
         <div>
           <strong>NAME</strong>
           <label>
-            <input type="text"/>
+            <input
+              type="text"
+              name="name"
+              onChange={onChange}/>
           </label>
         </div>
         <div>
           <strong>E-MAIL</strong>
           <label>
-            <input type="text"/>
+            <input
+              type="text"
+              name="email"
+              onChange={onChange}/>
           </label>
         </div>
       </>
