@@ -20,7 +20,7 @@ const FormGroup = ({isLogin}) => {
       [key]: value
     });
   };
-  const onClick = e => {
+  const onLogin = e => {
     e.preventDefault();
     if (!userId || !password) {
       return alert('아이디, 비밀번호를 채워주세요');
@@ -84,7 +84,7 @@ const FormGroup = ({isLogin}) => {
       <button
         type="submit"
         className={isLogin ? 'btnLogin' : 'btnRegister'}
-        onClick={onClick}>
+        onClick={onLogin}>
         <span>
           {isLogin ? 'LOGIN' : 'REGISTER'}
         </span>
