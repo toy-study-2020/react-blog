@@ -8,7 +8,7 @@ import GlobalStyle from './styles/globalStyle';
 function App() {
   return (
     <>
-      <GlobalStyle />
+      <GlobalStyle/>
       <Router>
         <Header />
         <main>
@@ -22,9 +22,11 @@ function App() {
           <Route
             path="/member/login"
             component={Member}/>
-          <Redirect path="*" to="/" />
+          <Redirect
+            path="*"
+            to="/"/>
         </main>
-        <Footer />
+        <Footer/>
       </Router>
     </>
   );
