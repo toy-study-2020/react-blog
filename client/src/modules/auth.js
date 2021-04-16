@@ -1,6 +1,6 @@
-import {createAction, handleActions} from 'redux-actions';
-import {takeLatest} from 'redux-saga/effects';
-import {API, createActionTypes, createRequestSaga} from '../lib/reduxUtils';
+import { createAction, handleActions } from 'redux-actions';
+import { takeLatest } from 'redux-saga/effects';
+import { API, createActionTypes, createRequestSaga } from '../lib/reduxUtils';
 
 const [REGISTER, REGISTER_SUCCESS, REGISTER_FAILURE] = createActionTypes('auth/REGISTER');
 const [LOGIN, LOGIN_SUCCESS, LOGIN_FAILURE] = createActionTypes('auth/LOGIN');
