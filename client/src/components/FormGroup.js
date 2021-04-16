@@ -1,6 +1,7 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
 import { loginAction, registerAction } from '../modules/auth';
+import { ButtonStyle, InputStyle } from '../styles/memberStyle';
 
 const FormGroup = ({isLogin}) => {
   const dispatch = useDispatch();
@@ -76,19 +77,19 @@ const FormGroup = ({isLogin}) => {
 
   return (
     <form>
-      <div>
+      <div className="formWrap">
         <strong>ID</strong>
         <label>
-          <input
+          <InputStyle
             type="text"
             name="userId"
             onChange={onChange}/>
         </label>
       </div>
-      <div>
+      <div className="formWrap">
         <strong>PASSWORD</strong>
         <label>
-          <input
+          <InputStyle
             type="password"
             autoComplete="off"
             name="password"
@@ -97,29 +98,29 @@ const FormGroup = ({isLogin}) => {
       </div>
       {!isLogin &&
       <>
-        <div>
+        <div className="formWrap">
           <strong>PASSWORD CONFIRM</strong>
           <label>
-            <input
+            <InputStyle
               type="password"
               autoComplete="off"
               name="passwordConfirm"
               onChange={onChange}/>
           </label>
         </div>
-        <div>
+        <div className="formWrap">
           <strong>NAME</strong>
           <label>
-            <input
+            <InputStyle
               type="text"
               name="name"
               onChange={onChange}/>
           </label>
         </div>
-        <div>
+        <div className="formWrap">
           <strong>E-MAIL</strong>
           <label>
-            <input
+            <InputStyle
               type="text"
               name="email"
               onChange={onChange}/>
@@ -127,14 +128,14 @@ const FormGroup = ({isLogin}) => {
         </div>
       </>
       }
-      <button
+      <ButtonStyle
         type="submit"
         className={isLogin ? 'btnLogin' : 'btnRegister'}
         onClick={onClick}>
         <span>
           {isLogin ? 'LOGIN' : 'REGISTER'}
         </span>
-      </button>
+      </ButtonStyle>
     </form>
   );
 };
