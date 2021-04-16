@@ -1,11 +1,12 @@
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
-import { ROUTER } from '../lib/constants';
+import { MENU } from '../lib/constants';
 import { HeaderStyle } from '../styles/headerStyle';
 
 const Header = ({isLogin, logout}) => {
-const Header = _ => {
   const [nav, setNav] = useState(false);
+  const {IS_LOGIN, IS_LOGOUT} = MENU;
+  const routes = isLogin ? IS_LOGIN : IS_LOGOUT;
   const handlerNav = _ => setNav(!nav);
   return (
     <HeaderStyle>
@@ -17,12 +18,18 @@ const Header = _ => {
       </button>
       <nav>
         <ul>
-          {ROUTER.member.map(r =>
-            <li key={r}>
+          {routes.map(menu =>
+            <li key={menu.key}>
               <Link
-                to={r === 'home' ? '/' : `/member/${r}`}
-                onClick={handlerNav}>
-                {r.toUpperCase()}
+                to={menu.link}
+                onClick={
+                  menu.name === 'LOGOUT'
+                    ? _ => {
+                      logout();
+                      handlerNav();
+                    }
+                    : handlerNav}>
+                {menu.name}
               </Link>
             </li>
           )}
