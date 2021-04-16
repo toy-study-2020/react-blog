@@ -27,7 +27,7 @@ const FormGroup = ({isLogin}) => {
     }
     dispatch(loginAction({userId, password}));
   };
-  
+
   useEffect(_ => {
     if (user) {
       const data = JSON.stringify(user);
@@ -50,7 +50,8 @@ const FormGroup = ({isLogin}) => {
         <strong>PASSWORD</strong>
         <label>
           <input
-            type="new-password"
+            type="password"
+            autoComplete="off"
             name="password"
             onChange={onChange}/>
         </label>
@@ -61,7 +62,8 @@ const FormGroup = ({isLogin}) => {
           <strong>PASSWORD CONFIRM</strong>
           <label>
             <input
-              type="new-password"
+              type="password"
+              autoComplete="off"
               name="passwordConfirm"/>
           </label>
         </div>
