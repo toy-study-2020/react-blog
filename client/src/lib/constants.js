@@ -29,7 +29,3 @@ export const MENU = {
     }
   ]
 };
-
-export const ROUTER = {
-  member: ['home', 'login', 'register']
-};
