@@ -1,62 +1,47 @@
 import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom';
+import { useEffect, useState } from 'react';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import Member from './containers/member/Member';
 import Main from './containers/main/Main';
-import { createGlobalStyle } from 'styled-components';
+import GlobalStyle from './styles/globalStyle';
 
-const GlobalStyle = createGlobalStyle`
-  body,
-  section,
-  article,
-  main,
-  header,
-  footer,
-  div,
-  ul,
-  li,
-  button,
-  a {
-    margin: 0;
-    padding: 0;
-  }
-  
-  ul,
-  li {
-    list-style: none;
-  }
-  
-  button,
-  a {
-    appearance: none;
-    border: none;
-    background: transparent;
-    
-    &:active {
-      opacity: .6;
-    }
-  }
-`
 function App() {
+  const [login, setLogin] = useState(false);
+  const logout = _ => {
+    sessionStorage.setItem('loginTest', '');
+    setLogin(false);
+  };
+
+  useEffect(() => {
+    setLogin(sessionStorage.getItem('loginTest') !== '');
+    return () => {
+      console.log(login);
+    };
+  }, [login]);
   return (
     <>
-      <GlobalStyle />
+      <GlobalStyle/>
       <Router>
-        <Header />
+        <Header
+          isLogin={login}
+          logout={logout}/>
         <main>
           <Route
             exact
             path="/"
-            render={Main}/>
+            component={Main}/>
           <Route
             path="/member/register"
-            render={Member}/>
+            component={Member}/>
           <Route
             path="/member/login"
-            render={Member}/>
-          <Redirect path="*" to="/" />
+            component={Member}/>
+          <Redirect
+            path="*"
+            to="/"/>
         </main>
-        <Footer />
+        <Footer/>
       </Router>
     </>
   );

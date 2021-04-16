@@ -1,79 +1,13 @@
 import { Link } from 'react-router-dom';
-import { ROUTER } from '../libs/constants';
-import styled from 'styled-components';
 import { useState } from 'react';
+import { MENU } from '../lib/constants';
+import { HeaderStyle, NavStyle } from '../styles/headerStyle';
 
-const HeaderStyle = styled.header `
-  display: block;
-  position: relative;
-  
-  button {
-    position: relative;
-    width: 50px;
-    height: 50px;
-    background-color: #f0f0f0;
-    padding: 10px;
-    box-sizing: border-box;
-    text-indent: -9999px;
-    
-    &[aria-expanded="true"] {
-      span:before {
-        transform: rotate(45deg);
-        top: 24px
-      }
-      
-      span:after {
-        transform: rotate(-45deg);
-        bottom: 24px;
-      }
-      
-      + nav {
-        display: flex;
-      }
-    }
-    
-    span {
-      display: block;
-      position: absolute;
-      left: 0;
-      top: 0;
-      width: 100%;
-      height: 100%;
-    }
-    
-    span:before,
-    span:after {
-      content: "";
-      position: absolute;
-      left: 50%;
-      width: 30px;
-      height: 2px;
-      margin-left: -15px;
-      background-color: #000;
-      transition: transform .3s;
-    }
-    
-    span:before {
-      top: 14px;
-    }
-    
-    span:after {
-      bottom: 14px;
-    }
-  }
-  
-  nav {
-    display: none;
-  }
-`;
-const Header = _ => {
+const Header = ({isLogin, logout}) => {
   const [nav, setNav] = useState(false);
-  const handlerNav = ({state}) => {
-    if (state === 'close') {
-      return setNav(false);
-    }
-    setNav(!nav);
-  };
+  const {IS_LOGIN, IS_LOGOUT} = MENU;
+  const routes = isLogin ? IS_LOGIN : IS_LOGOUT;
+  const handlerNav = _ => setNav(!nav);
   return (
     <HeaderStyle>
       <button
@@ -82,21 +16,25 @@ const Header = _ => {
         onClick={handlerNav}>
         <span>메뉴</span>
       </button>
-      <nav>
+      <NavStyle>
         <ul>
-          {ROUTER.member.map(r =>
-            <li key={r}>
+          {routes.map(menu =>
+            <li key={menu.key}>
               <Link
-                to={r === 'home' ? '/' : `/member/${r}`}
-                onClick={_ => {
-                  handlerNav({state: 'close'})
-                }}>
-                {r.toUpperCase()}
+                to={menu.link}
+                onClick={
+                  menu.name === 'LOGOUT'
+                    ? _ => {
+                      logout();
+                      handlerNav();
+                    }
+                    : handlerNav}>
+                {menu.name}
               </Link>
             </li>
           )}
         </ul>
-      </nav>
+      </NavStyle>
     </HeaderStyle>
   );
 };
