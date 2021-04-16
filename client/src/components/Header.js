@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
 import { MENU } from '../lib/constants';
-import { HeaderStyle } from '../styles/headerStyle';
+import { HeaderStyle, NavStyle } from '../styles/headerStyle';
 
 const Header = ({isLogin, logout}) => {
   const [nav, setNav] = useState(false);
@@ -16,7 +16,7 @@ const Header = ({isLogin, logout}) => {
         onClick={handlerNav}>
         <span>메뉴</span>
       </button>
-      <nav>
+      <NavStyle>
         <ul>
           {routes.map(menu =>
             <li key={menu.key}>
@@ -34,7 +34,7 @@ const Header = ({isLogin, logout}) => {
             </li>
           )}
         </ul>
-      </nav>
+      </NavStyle>
     </HeaderStyle>
   );
 };
